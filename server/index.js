@@ -3,8 +3,8 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 
-const MongoManager = require("./mongo");
-const PGManager = require("./postgres");
+const MongoManager = require("./db/mongo");
+const PGManager = require("./db/postgres");
 
 const app = express();
 app.use(cors());
