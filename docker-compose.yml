@@ -3,6 +3,7 @@ services:
 
   postgres:
     image: 'postgres:latest'
+    container_name: postgres-test
     environment:
       - POSTGRES_PASSWORD=postgres_password
 
@@ -15,6 +16,7 @@ services:
       MONGO_INITDB_ROOT_PASSWORD: test
 
   nginx:
+    container_name: nginx-test
     depends_on:
       - api
       - client
@@ -25,8 +27,8 @@ services:
     ports:
       - "3050:80"
 
-
   api:
+    container_name: api-test
     build:
       dockerfile: Dockerfile.dev
       context: './server'
@@ -42,10 +44,12 @@ services:
       - MONGO_URL=mongodb://root:test@mongo-test:27017/
       - MONGO_DBNAME=firstCustomTest
       - MONGO_COLLECTION=testing
-    ports:
-      - "5000:5000"
+    # expose for development
+    # ports:
+    #   - "5000:5000"
 
   client:
+    container_name: client-test
     stdin_open: true
     build:
       dockerfile: Dockerfile.dev
